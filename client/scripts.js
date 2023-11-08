@@ -30,6 +30,7 @@ function ShowList() {
 async function GetList() {
 
   theList = await http.get("/api");
+  ShowList();
 }
 
 /**
@@ -45,7 +46,13 @@ async function WriteList() {
  * Then the frontend display and backend are updated.
  * @param e ignore.
  */
-async function httpPost(e) {
+function httpPost(e) {
+
+  // The filter function removes any instance of the specified element already in the list. Elements are not repeated.
+  theList = theList.filter((element) => {
+    
+    return element !== input.value;
+  });
 
   theList.push(input.value);
 
@@ -86,7 +93,6 @@ async function main() {
   showLoading();
 
   await GetList();
-  ShowList();
 
   addButton.disabled = false;
   delButton.disabled = false;
