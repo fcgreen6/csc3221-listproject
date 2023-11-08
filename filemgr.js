@@ -1,21 +1,39 @@
 const fs = require("fs/promises")
 
+/**
+ * The ReadData function reads the data stored within the listdata file within the file system.
+ * @returns The data stored within the file system as a javascript object.
+ */
 async function ReadData() {
+  
   try {
-    // Make sure the file exists
-    // Read the file
-    // convert the buffer to a json object and return it
-  } catch (error) {
 
+    listData = await fs.readFile("listdata.json", {
+      encoding: "utf8",
+    });
+
+    return JSON.parse(listData);
+  } 
+  catch (error) {
+
+    console.log(error);
   }
 }
 
+/**
+ * The WriteData function stores the array of values within the dataOut parameter within the file listdata.json.
+ * @param dataOut The array of values that will be stored within the file system.
+ */
 async function WriteData(dataOut) {
   try {
-    // Write the file
+    
+    listData = await fs.writeFile("listdata.json", dataOut, {
+      encoding: "utf8",
+    });
+  } 
+  catch (error) {
 
-  } catch (error) {
-
+    console.log(error);
   }
 }
 

@@ -10,14 +10,21 @@ const app = express();
 app.use(express.static("./Client"));
 app.use(express.json());
 
-// Define HTTP routes listenting for requests
+/**
+ * The server returns get requests as a stringified json object.
+ */
 app.get("/api", async (req,res) => {
 
-})
+  res.json(await fm.ReadData());
+});
 
+/**
+ * The post function uses the file manager object to store a stringified variation of the requested object.
+ */
 app.post("/api", async (req,res) => {
 
-})
+  await fm.WriteData(JSON.stringify(req.body));
+});
 
 // page not found route
 app.all("*", (req,res) => {
